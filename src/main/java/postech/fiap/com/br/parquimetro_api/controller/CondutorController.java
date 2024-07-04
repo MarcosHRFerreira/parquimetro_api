@@ -26,12 +26,17 @@ public class CondutorController {
     @Transactional
     public ResponseEntity cadastrar(@Valid @RequestBody CondutorDto dados, UriComponentsBuilder uriBuilder){
 
-        var condutor= new CondutorEntity(dados);
-        repository.save(condutor);
+        try {
+            var condutor = new CondutorEntity(dados);
+            repository.save(condutor);
 
-        var uri = uriBuilder.path("/condutor/{id}").buildAndExpand(condutor.getId_condutor()).toUri();
+            var uri = uriBuilder.path("/condutor/{id}").buildAndExpand(condutor.getId_condutor()).toUri();
 
-        return ResponseEntity.created(uri).body(new DadosDetalhamentoCondutorDto(condutor));
+            return ResponseEntity.created(uri).body(new DadosDetalhamentoCondutorDto(condutor));
+        }
+        catch (ValidacaoException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PutMapping

@@ -1,6 +1,8 @@
 package postech.fiap.com.br.parquimetro_api.domain.locacao;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +13,7 @@ import postech.fiap.com.br.parquimetro_api.infra.EmailService;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Component
 @Configuration
@@ -29,14 +32,18 @@ public class AlertaLocacaoService {
     @Autowired
     private EmailService emailService;
 
-    @Value("${alerta.locacao.fixedRate}")
-    private long fixedRate;
 
-    @Scheduled(fixedRateString = "${alerta.locacao.fixedRate}")
+   // @Scheduled(fixedRateString = "${alerta.locacao.fixedRate}")
+
+    Logger logger = LoggerFactory.getLogger(AlertaLocacaoService.class);
+
+     @Scheduled(fixedDelay = 1, timeUnit = TimeUnit.MINUTES)
 
     public void verificarTempoEstacionamento() {
 
         try {
+            var dateTime=LocalDateTime.now();
+            logger.info("Verificando se existe periodo a vencer {}", dateTime);
 
             List<LocacaoEntity> locacoes = locacaoRepository.findAllAbertas();
             for (LocacaoEntity locacao : locacoes) {

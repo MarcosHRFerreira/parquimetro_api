@@ -39,7 +39,8 @@ public class LocacaoService {
     }
 
     @Transactional
-    public LocacaoEntity gravar(LocacaoDto locacaoDto, DadosAtualizacaoLocacao dadosAtualizacaoLocacao) {
+    //public LocacaoEntity gravar(LocacaoDto locacaoDto, DadosAtualizacaoLocacao dadosAtualizacaoLocacao) {
+    public LocacaoEntity gravar(LocacaoDto locacaoDto) {
 
         CondutorEntity condutor = getCondutor(locacaoDto.id_condutor());
         VeiculoEntity veiculo = getVeiculo(locacaoDto.id_veiculo());

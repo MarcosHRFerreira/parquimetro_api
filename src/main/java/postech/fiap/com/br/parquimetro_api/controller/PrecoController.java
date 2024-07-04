@@ -14,7 +14,7 @@ import postech.fiap.com.br.parquimetro_api.ValidacaoException;
 import postech.fiap.com.br.parquimetro_api.domain.preco.*;
 
 @RestController
-@RequestMapping("preco")
+@RequestMapping("precos")
 public class PrecoController {
 
     @Autowired
@@ -22,7 +22,7 @@ public class PrecoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity cadastrar(@RequestBody PrecoDto dados , UriComponentsBuilder uriBuilder) {
+    public ResponseEntity cadastrar(@RequestBody PrecoDto dados, UriComponentsBuilder uriBuilder) {
 
         try {
             var preco = new PrecoEntity(dados);
@@ -31,17 +31,19 @@ public class PrecoController {
             var uri = uriBuilder.path("/preco/{id}").buildAndExpand(preco.getId_preco()).toUri();
 
             return ResponseEntity.created(uri).body(new DadosDetalhamentoPrecoDto(preco));
-        }catch (ValidacaoException e){
+        } catch (ValidacaoException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
 
     }
+
     @GetMapping
-    public ResponseEntity<Page<DadosListagemPrecoDto>> listar(@PageableDefault(size =10 ) Pageable paginacao){
-           var page = precoRepository.findAll(paginacao).map(DadosListagemPrecoDto::new);
-           return ResponseEntity.ok(page);
+    public ResponseEntity<Page<DadosListagemPrecoDto>> listar(@PageableDefault(size = 10) Pageable paginacao) {
+        var page = precoRepository.findAll(paginacao).map(DadosListagemPrecoDto::new);
+        return ResponseEntity.ok(page);
 
     }
+
     @PutMapping
     @Transactional
     public ResponseEntity altera(@RequestBody @Valid DadosAtualizacaoPrecoDto dados) {

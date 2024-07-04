@@ -15,7 +15,7 @@ import postech.fiap.com.br.parquimetro_api.domain.locacao.*;
 import postech.fiap.com.br.parquimetro_api.domain.veiculo.DadosListagemVeiculoDto;
 
 @RestController
-@RequestMapping("locacao")
+@RequestMapping("locacoes")
 public class LocacaoController {
 
     @Autowired
@@ -27,33 +27,32 @@ public class LocacaoController {
     @PostMapping
     @Transactional
 
-    public ResponseEntity gravar(@RequestBody @Valid LocacaoDto locacaoDto, DadosAtualizacaoLocacao dadosAtualizacaoLocacao, UriComponentsBuilder uriComponentsBuilder){
+    public ResponseEntity gravar(@RequestBody @Valid LocacaoDto locacaoDto, UriComponentsBuilder uriComponentsBuilder) {
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(locacaoService.gravar(locacaoDto,dadosAtualizacaoLocacao));
+        return ResponseEntity.status(HttpStatus.CREATED).body(locacaoService.gravar(locacaoDto));
     }
 
     @PutMapping
     @Transactional
 
-    public ResponseEntity alterar(@RequestBody DadosAtualizacaoLocacao dadosAtualizacaoLocacao, UriComponentsBuilder uriComponentsBuilder){
+    public ResponseEntity alterar(@RequestBody DadosAtualizacaoLocacao dadosAtualizacaoLocacao, UriComponentsBuilder uriComponentsBuilder) {
 
         return ResponseEntity.status(HttpStatus.OK).body(locacaoService.alterar(dadosAtualizacaoLocacao));
     }
 
     @PutMapping("/encerrar")
     @Transactional
-
     public ResponseEntity encerraLocacao(@RequestBody DadosAtualizacaoLocacao dadosAtualizacaoLocacao, UriComponentsBuilder uriComponentsBuilder) {
-
         return ResponseEntity.status(HttpStatus.OK).body(locacaoService.encerraLocacao(dadosAtualizacaoLocacao));
     }
 
     @GetMapping
-    public ResponseEntity<Page<DadosListagemLocacaoDto>> listar(@PageableDefault(size =10) Pageable paginacao){
+    public ResponseEntity<Page<DadosListagemLocacaoDto>> listar(@PageableDefault(size = 10) Pageable paginacao) {
         var page = locacaoRepository.findAll(paginacao).map(DadosListagemLocacaoDto::new);
         return ResponseEntity.ok(page);
 
     }
+
 
 
 }
