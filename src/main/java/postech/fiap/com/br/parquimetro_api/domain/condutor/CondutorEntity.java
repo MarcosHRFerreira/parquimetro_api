@@ -1,6 +1,5 @@
 package postech.fiap.com.br.parquimetro_api.domain.condutor;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
@@ -31,11 +30,6 @@ public class CondutorEntity {
 
     @Embedded
     private Endereco endereco;
-
-//    @ManyToOne
-//    @JoinColumn(name = "id_veiculo", referencedColumnName = "id_veiculo")
-//    private CondutorEntity condutorEntity;
-
 
     public CondutorEntity(CondutorDto dados){
 

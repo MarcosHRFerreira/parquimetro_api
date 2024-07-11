@@ -16,7 +16,7 @@ import postech.fiap.com.br.parquimetro_api.domain.condutor.*;
 import postech.fiap.com.br.parquimetro_api.exception.NaoEncontradoException;
 
 @RestController
-@RequestMapping("condutor")
+@RequestMapping("condutores")
 public class CondutorController {
 
     @Autowired
