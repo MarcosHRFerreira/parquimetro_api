@@ -2,6 +2,7 @@ package postech.fiap.com.br.parquimetro_api.domain.condutor;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import postech.fiap.com.br.parquimetro_api.domain.endereco.Endereco;
 
@@ -18,12 +19,15 @@ public class CondutorEntity {
     private Long id_condutor;
 
     @NotEmpty
+    @NotNull
     private String nome;
 
     @NotEmpty
+    @NotNull
     private String email;
 
     @NotEmpty
+    @NotNull
     private String telefone;
 
     private Long id_veiculo;

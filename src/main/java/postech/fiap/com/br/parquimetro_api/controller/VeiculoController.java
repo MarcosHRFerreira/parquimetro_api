@@ -27,7 +27,6 @@ public class VeiculoController {
     public VeiculoController(VeiculoRepository veiculoRepository) {
     }
 
-
     @PostMapping
     @Transactional
     public ResponseEntity cadastrar(@RequestBody VeiculoDto veiculoDto, UriComponentsBuilder uriBuilder) {

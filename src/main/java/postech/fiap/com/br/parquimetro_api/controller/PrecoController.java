@@ -22,7 +22,7 @@ public class PrecoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity cadastrar(@RequestBody PrecoDto dados, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity cadastrar(@RequestBody @Valid  PrecoDto dados, UriComponentsBuilder uriBuilder) {
 
         try {
             var preco = new PrecoEntity(dados);

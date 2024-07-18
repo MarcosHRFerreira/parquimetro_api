@@ -1,6 +1,8 @@
 package postech.fiap.com.br.parquimetro_api.domain.preco;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity(name="PrecoEntity")
@@ -16,6 +18,7 @@ public class PrecoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_preco;
+
     private Double valor;
 
     @Enumerated(EnumType.STRING)

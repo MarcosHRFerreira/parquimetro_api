@@ -52,7 +52,7 @@ class CondutorControllerTest {
         DadosDetalhamentoCondutorDto dadosDetalhamentoCondutorDto=new DadosDetalhamentoCondutorDto(condutorEntity);
 
         // Act & Assert: Execute a requisição POST e verifique o status da resposta
-        mockMvc.perform(MockMvcRequestBuilders.post("/condutor")
+        mockMvc.perform(MockMvcRequestBuilders.post("/condutores")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(condutorDto)))
                 .andExpect(status().isCreated())

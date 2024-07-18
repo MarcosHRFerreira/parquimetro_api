@@ -1,6 +1,7 @@
 package postech.fiap.com.br.parquimetro_api.domain.locacao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.server.DelegatingServerHttpResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import postech.fiap.com.br.parquimetro_api.domain.condutor.CondutorEntity;
@@ -57,10 +58,16 @@ public class LocacaoService {
                 locacao.setDuracao(12L);
                 locacao.setValor_cobrado(preco.getValor());
             }
-            if ((locacaoDto.tipo_periodo() == Tipo_Periodo.HORA) && (locacaoDto.duaracao() == 0)) {
-                locacao.setDuracao(1L);
-                locacao.setValor_cobrado(preco.getValor() * 1L);
+            if ((locacaoDto.tipo_periodo() == Tipo_Periodo.HORA)){
+               if(locacaoDto.duaracao() == 0){
+                    locacao.setDuracao(1L);
+                    locacao.setValor_cobrado(preco.getValor() * 1L);
+                }else {
+                   locacao.setValor_cobrado(preco.getValor() * locacaoDto.duaracao());
+               }
+
             }
+
             if (isDataEntradaValida(locacaoDto.data_entrada().toLocalDate())) {
                 throw new DatasException("Verificar a Data_Entrada, ela não pode ser maior ou menor que a data atual");
             }
@@ -89,7 +96,7 @@ public class LocacaoService {
             throw new CondicaoIncorretaException(e.getMessage());
         } catch (Exception e) {
             // Tratar outras exceções que podem ocorrer durante a gravação
-            throw new RuntimeException("Erro ao gravar locação.", e);
+            throw new RuntimeException("Erro ao gravar locação." , e);
         }
 
     }
@@ -120,6 +127,7 @@ public class LocacaoService {
             locacao.setTipo_periodo(dadosAtualizacaoLocacao.tipo_periodo());
 
             locacao.setData_encerramento(null);
+
             locacao.setId_locacao(dadosAtualizacaoLocacao.id_locacao());
             locacao.setData_entrada(dadosAtualizacaoLocacao.data_entrada());
             locacao.setTipo_pagamento(dadosAtualizacaoLocacao.tipo_pagamento());

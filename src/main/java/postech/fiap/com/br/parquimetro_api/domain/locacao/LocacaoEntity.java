@@ -1,6 +1,7 @@
 package postech.fiap.com.br.parquimetro_api.domain.locacao;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import postech.fiap.com.br.parquimetro_api.domain.condutor.CondutorEntity;
@@ -19,8 +20,7 @@ public class LocacaoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_locacao;
 
-    @NotNull
-    private LocalDateTime data_entrada;
+       private LocalDateTime data_entrada;
 
     private LocalDateTime data_encerramento;
 
