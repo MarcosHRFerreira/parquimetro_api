@@ -1,0 +1,2 @@
+ALTER TABLE Locacao
+ADD COLUMN aviso15minutos BOOLEAN;

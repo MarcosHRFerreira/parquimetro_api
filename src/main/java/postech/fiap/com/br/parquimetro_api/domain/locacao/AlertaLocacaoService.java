@@ -19,11 +19,11 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class AlertaLocacaoService {
 
-     String subtitulo ="Alerta de Locação";
+     String subtitulo ="Renovação do período da vaga do estacionamento";
      String mensagem1= "O tempo de locação está vencendo, para o veiculo  - ";;
-     String mensagem2= "O tempo estenderá automaticamente o estacionamento\n" +
+     String mensagem2= "O tempo foi extendido automaticamente \n" +
              "por mais uma hora, a menos que o condutor desligue o registro. - ";
-     String mensagem;
+     String mensagem3 = "Falta 15 minutos para vencer o prazo do estacionamento ";
      String descricao_veiculo;
 
     @Autowired
@@ -66,22 +66,27 @@ public class AlertaLocacaoService {
                     // O tempo já expirou, não enviar mais alertas
                     continue;
                 }
-                //verificando se o tempo restante da locação é menor ou igual a 300 segundos, ou seja, 5 minutos.
-                if (tempoRestante <= 300) {
+
+                if (tempoRestante <= 900 && locacao.getAviso15minutos()==true) {
+                    enviarAlerta(locacao.getCondutorEntity().getEmail(), "Alerta de Vencimento do Estacionamento", mensagem3 + " " + descricao_veiculo);
+                    locacao.setAviso15minutos(false);
+                    locacaoRepository.save(locacao);
+                }
+
+
+                //verificando se o tempo restante da locação é menor ou igual a 60 segundos, ou seja, 1 minuto.
+                if (tempoRestante <= 60) {
 
                     if (Tipo_Periodo.HORA.equals(locacao.getTipo_periodo())) {
-
                         locacao.setDuracao(locacao.getDuracao() + 1);
-
                         locacao.setValor_cobrado(locacao.getPrecoEntity().getValor() * locacao.getDuracao());
+                        locacao.setAviso15minutos(true);
 
                         locacaoRepository.save(locacao);
 
-                        mensagem =  mensagem2  + descricao_veiculo;
-                        enviarAlerta(locacao.getCondutorEntity().getEmail(), subtitulo, mensagem );
+                        enviarAlerta(locacao.getCondutorEntity().getEmail(), subtitulo, mensagem2  + " " + descricao_veiculo );
                     }else {
-                        mensagem =  mensagem1  + descricao_veiculo;
-                        enviarAlerta(locacao.getCondutorEntity().getEmail(), subtitulo, mensagem );
+                        enviarAlerta(locacao.getCondutorEntity().getEmail(), subtitulo, mensagem1  + " " + descricao_veiculo );
                     }
                 }
             }

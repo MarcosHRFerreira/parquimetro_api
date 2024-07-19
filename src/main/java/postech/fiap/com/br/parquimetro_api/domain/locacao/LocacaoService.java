@@ -85,6 +85,7 @@ public class LocacaoService {
             locacao.setVeiculoEntity(veiculo);
             locacao.setPrecoEntity(preco);
             locacao.setData_encerramento(null);
+            locacao.setAviso15minutos(true);
 
             return locacaoRepository.save(locacao);
 

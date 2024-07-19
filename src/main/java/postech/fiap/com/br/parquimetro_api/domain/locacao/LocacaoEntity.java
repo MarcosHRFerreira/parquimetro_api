@@ -31,6 +31,8 @@ public class LocacaoEntity {
 
     private Double valor_cobrado;
 
+    private Boolean aviso15minutos;
+
 
     public Tipo_Periodo getTipo_periodo() {
         return tipo_periodo;
@@ -77,7 +79,16 @@ public class LocacaoEntity {
                 ", condutorEntity=" + condutorEntity +
                 ", veiculoEntity=" + veiculoEntity +
                 ", tipo_periodo=" + tipo_periodo +
+                ", aviso15minutos=" + aviso15minutos +
                 '}';
+    }
+
+    public Boolean getAviso15minutos() {
+        return aviso15minutos;
+    }
+
+    public void setAviso15minutos(Boolean aviso15minutos) {
+        this.aviso15minutos = aviso15minutos;
     }
 
     public Long getId_locacao() {
@@ -151,4 +162,6 @@ public class LocacaoEntity {
     public void setVeiculoEntity(VeiculoEntity veiculoEntity) {
         this.veiculoEntity = veiculoEntity;
     }
+
+
 }
