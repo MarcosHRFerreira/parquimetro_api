@@ -1,10 +1,8 @@
 package postech.fiap.com.br.parquimetro_api.domain.locacao;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -20,10 +18,9 @@ import java.util.concurrent.TimeUnit;
 public class AlertaLocacaoService {
 
      String subtitulo ="Renovação do período da vaga do estacionamento";
-     String mensagem1= "O tempo de locação está vencendo, para o veiculo  - ";;
-     String mensagem2= "O tempo foi extendido automaticamente \n" +
+     String mensagem1= "O tempo foi extendido automaticamente \n" +
              "por mais uma hora, a menos que o condutor desligue o registro. - ";
-     String mensagem3 = "Falta 15 minutos para vencer o prazo do estacionamento ";
+     String mensagem2 = "Faltam 15 minutos para vencer o prazo do estacionamento ";
      String descricao_veiculo;
 
     @Autowired
@@ -31,9 +28,6 @@ public class AlertaLocacaoService {
 
     @Autowired
     private EmailService emailService;
-
-
-   // @Scheduled(fixedRateString = "${alerta.locacao.fixedRate}")
 
     Logger logger = LoggerFactory.getLogger(AlertaLocacaoService.class);
 
@@ -66,14 +60,12 @@ public class AlertaLocacaoService {
                     // O tempo já expirou, não enviar mais alertas
                     continue;
                 }
-
+                //Verifica 15 minutos antes do vencimento, dispara o email.
                 if (tempoRestante <= 900 && locacao.getAviso15minutos()==true) {
-                    enviarAlerta(locacao.getCondutorEntity().getEmail(), "Alerta de Vencimento do Estacionamento", mensagem3 + " " + descricao_veiculo);
+                    enviarAlerta(locacao.getCondutorEntity().getEmail(), "Alerta de Vencimento do Estacionamento", mensagem2 + " " + descricao_veiculo);
                     locacao.setAviso15minutos(false);
                     locacaoRepository.save(locacao);
                 }
-
-
                 //verificando se o tempo restante da locação é menor ou igual a 60 segundos, ou seja, 1 minuto.
                 if (tempoRestante <= 60) {
 
@@ -84,9 +76,7 @@ public class AlertaLocacaoService {
 
                         locacaoRepository.save(locacao);
 
-                        enviarAlerta(locacao.getCondutorEntity().getEmail(), subtitulo, mensagem2  + " " + descricao_veiculo );
-                    }else {
-                        enviarAlerta(locacao.getCondutorEntity().getEmail(), subtitulo, mensagem1  + " " + descricao_veiculo );
+                        enviarAlerta(locacao.getCondutorEntity().getEmail(), subtitulo, mensagem1 + " " + descricao_veiculo);
                     }
                 }
             }

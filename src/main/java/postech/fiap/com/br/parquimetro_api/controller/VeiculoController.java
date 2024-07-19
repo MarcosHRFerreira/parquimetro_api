@@ -1,6 +1,5 @@
 package postech.fiap.com.br.parquimetro_api.controller;
 
-
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,7 +8,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import postech.fiap.com.br.parquimetro_api.ValidacaoException;
@@ -75,12 +73,5 @@ public class VeiculoController {
         }
 
     }
-//    @GetMapping
-//    public ResponseEntity<List<DadosListagemVeiculoDto>> listar() {
-//        var veiculos = veiculoRepository.findAll().stream()
-//                .map(DadosListagemVeiculoDto::new)
-//                .toList();
-//        return ResponseEntity.ok(veiculos);
-//    }
 
 }
