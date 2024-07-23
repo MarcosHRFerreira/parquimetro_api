@@ -72,7 +72,7 @@ class LocacaoControllerTest {
         //DadosAtualizacaoLocacao dadosAtualizacaoLocacao = new DadosAtualizacaoLocacao(1L,dataEntrada,null,5L,0D, Tipo_Pagamento.CARTAO_CREDITO,Status_Pagamento.PENDENTE, Tipo_Periodo.FIXO, 1L,1L,1L);
         //  DadosAtualizacaoLocacao dadosAtualizacaoLocacao = new DadosAtualizacaoLocacao();
 
-        LocacaoEntity locacao = new LocacaoEntity(1l, dataEntrada, null, 5L, Tipo_Periodo.FIXO, 0D, Tipo_Pagamento.CARTAO_CREDITO, Status_Pagamento.PENDENTE, condutorEntity, veiculoEntity, precoEntity);
+        LocacaoEntity locacao = new LocacaoEntity(1l, dataEntrada, null, 5L, Tipo_Periodo.FIXO, 0D,true, Tipo_Pagamento.CARTAO_CREDITO, Status_Pagamento.PENDENTE, condutorEntity, veiculoEntity, precoEntity);
 
         // 2. Crie um objeto de retorno para o locacaoService.gravar()
         Object retornoGravar = locacao;
@@ -104,7 +104,7 @@ class LocacaoControllerTest {
         DadosAtualizacaoLocacao dadosAtualizacaoLocacao = new DadosAtualizacaoLocacao(2L,dataEntrada,null,5L,0D, Tipo_Pagamento.CARTAO_CREDITO,Status_Pagamento.PENDENTE, Tipo_Periodo.FIXO, 1L,1L,1L);
 
 
-        LocacaoEntity locacao = new LocacaoEntity(2l, dataEntrada, null, 5L, Tipo_Periodo.FIXO, 0D, Tipo_Pagamento.CARTAO_CREDITO, Status_Pagamento.PENDENTE, condutorEntity, veiculoEntity, precoEntity);
+        LocacaoEntity locacao = new LocacaoEntity(2l, dataEntrada, null, 5L, Tipo_Periodo.FIXO, 0D,true, Tipo_Pagamento.CARTAO_CREDITO, Status_Pagamento.PENDENTE, condutorEntity, veiculoEntity, precoEntity);
 
         // 2. Crie um objeto de retorno para o locacaoService.gravar()
         Object retornoGravar = locacao;
@@ -131,7 +131,7 @@ class LocacaoControllerTest {
         DadosAtualizacaoLocacao dadosAtualizacaoLocacao = new DadosAtualizacaoLocacao(2L,dataEntrada,null,5L,0D, Tipo_Pagamento.CARTAO_CREDITO,Status_Pagamento.PENDENTE, Tipo_Periodo.FIXO, 1L,1L,1L);
         // ... preencha os dados do objeto
 
-        LocacaoEntity locacao = new LocacaoEntity(2l, dataEntrada, null, 5L, Tipo_Periodo.FIXO, 0D, Tipo_Pagamento.CARTAO_CREDITO, Status_Pagamento.PENDENTE, condutorEntity, veiculoEntity, precoEntity);
+        LocacaoEntity locacao = new LocacaoEntity(2l, dataEntrada, null, 5L, Tipo_Periodo.FIXO, 0D,true, Tipo_Pagamento.CARTAO_CREDITO, Status_Pagamento.PENDENTE, condutorEntity, veiculoEntity, precoEntity);
         // ... preencha os dados da locação encerrada
 
         // Simula o comportamento do LocacaoService
@@ -150,8 +150,8 @@ class LocacaoControllerTest {
         //1. Dados de teste
 
         List<LocacaoEntity> locacoes = Arrays.asList(
-                new LocacaoEntity(2l, LocalDateTime.now(), null, 5L, Tipo_Periodo.FIXO, 0D, Tipo_Pagamento.CARTAO_CREDITO, Status_Pagamento.PENDENTE, condutorEntity, veiculoEntity, precoEntity),
-                new LocacaoEntity(3l, LocalDateTime.now(), null, 5L, Tipo_Periodo.FIXO, 0D, Tipo_Pagamento.CARTAO_CREDITO, Status_Pagamento.PENDENTE, condutorEntity, veiculoEntity, precoEntity)
+                new LocacaoEntity(2l, LocalDateTime.now(), null, 5L, Tipo_Periodo.FIXO, 0D,true, Tipo_Pagamento.CARTAO_CREDITO, Status_Pagamento.PENDENTE, condutorEntity, veiculoEntity, precoEntity),
+                new LocacaoEntity(3l, LocalDateTime.now(), null, 5L, Tipo_Periodo.FIXO, 0D,true, Tipo_Pagamento.CARTAO_CREDITO, Status_Pagamento.PENDENTE, condutorEntity, veiculoEntity, precoEntity)
         );
 
         // 2. Crie um PageImpl com os veiculos de teste
