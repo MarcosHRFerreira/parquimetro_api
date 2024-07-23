@@ -35,23 +35,30 @@ public class VeiculoEntity {
 
     public VeiculoEntity(){
     }
-
     public VeiculoEntity(VeiculoDto dados){
-        this.modelo=dados.modelo();
-        this.marca=dados.marca();
-        this.placa=dados.placa();
+
+        if (dados.modelo() != null) {
+            this.modelo = dados.modelo().toUpperCase();
+        }
+        if (dados.marca() != null) {
+            this.marca = dados.marca().toUpperCase();
+        }
+        if (dados.placa() != null) {
+            this.placa = dados.placa().toUpperCase();
+        }
         this.tipo_veiculo=dados.tipo_veiculo();
+
     }
 
     public void atualizarInformacoes(DadosAtualizacaoVeiculosDto dados) {
         if (dados.modelo() != null) {
-            this.modelo = dados.modelo();
+            this.modelo = dados.modelo().toUpperCase();
         }
         if (dados.marca() != null) {
-            this.marca = dados.marca();
+            this.marca = dados.marca().toUpperCase();
         }
         if (dados.placa() != null) {
-            this.placa = dados.placa();
+            this.placa = dados.placa().toUpperCase();
         }
         if (dados.tipo_veiculo() != null) {
             this.tipo_veiculo = dados.tipo_veiculo();

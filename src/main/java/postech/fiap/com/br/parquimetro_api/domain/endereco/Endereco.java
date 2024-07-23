@@ -20,36 +20,51 @@ public class Endereco {
     private String uf;
 
     public Endereco(DadosEndereco dados) {
-        this.logradouro = dados.logradouro();
-        this.bairro = dados.bairro();
-        this.cep = dados.cep();
-        this.uf = dados.uf();
-        this.cidade = dados.cidade();
-        this.numero = dados.numero();
-        this.complemento = dados.complemento();
-    }
 
-    public void atualizarInformacoes(DadosEndereco dados) {
         if (dados.logradouro() != null) {
-            this.logradouro = dados.logradouro();
+            this.logradouro = dados.logradouro().toUpperCase();
         }
         if (dados.bairro() != null) {
-            this.bairro = dados.bairro();
+            this.bairro = dados.bairro().toUpperCase();
         }
         if (dados.cep() != null) {
-            this.cep = dados.cep();
+            this.cep = dados.cep().toUpperCase();
         }
         if (dados.uf() != null) {
-            this.uf = dados.uf();
+            this.uf = dados.uf().toUpperCase();
         }
         if (dados.cidade() != null) {
-            this.cidade = dados.cidade();
+            this.cidade = dados.cidade().toUpperCase();
         }
         if (dados.numero() != null) {
             this.numero = dados.numero();
         }
         if (dados.complemento() != null) {
-            this.complemento = dados.complemento();
+            this.complemento = dados.complemento().toUpperCase();;
+        }
+    }
+
+    public void atualizarInformacoes(DadosEndereco dados) {
+        if (dados.logradouro() != null) {
+            this.logradouro = dados.logradouro().toUpperCase();
+        }
+        if (dados.bairro() != null) {
+            this.bairro = dados.bairro().toUpperCase();
+        }
+        if (dados.cep() != null) {
+            this.cep = dados.cep();
+        }
+        if (dados.uf() != null) {
+            this.uf = dados.uf().toUpperCase();
+        }
+        if (dados.cidade() != null) {
+            this.cidade = dados.cidade().toUpperCase();
+        }
+        if (dados.numero() != null) {
+            this.numero = dados.numero();
+        }
+        if (dados.complemento() != null) {
+            this.complemento = dados.complemento().toUpperCase();
         }
     }
 }

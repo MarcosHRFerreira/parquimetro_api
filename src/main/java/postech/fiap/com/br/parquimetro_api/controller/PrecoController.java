@@ -34,16 +34,12 @@ public class PrecoController {
         } catch (ValidacaoException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-
     }
-
     @GetMapping
     public ResponseEntity<Page<DadosListagemPrecoDto>> listar(@PageableDefault(size = 10) Pageable paginacao) {
         var page = precoRepository.findAll(paginacao).map(DadosListagemPrecoDto::new);
         return ResponseEntity.ok(page);
-
     }
-
     @PutMapping
     @Transactional
     public ResponseEntity altera(@RequestBody @Valid DadosAtualizacaoPrecoDto dados) {

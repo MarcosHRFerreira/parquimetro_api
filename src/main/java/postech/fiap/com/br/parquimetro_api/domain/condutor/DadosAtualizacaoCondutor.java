@@ -11,5 +11,4 @@ public record DadosAtualizacaoCondutor(
         String telefone,
         Long id_veiculo,
         Endereco endereco){
-
 }

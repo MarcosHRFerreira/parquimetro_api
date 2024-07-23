@@ -37,8 +37,12 @@ public class CondutorEntity {
 
     public CondutorEntity(CondutorDto dados){
 
-        this.nome=dados.nome();
-        this.email=dados.email();
+        if (dados.nome() != null) {
+            this.nome = dados.nome().toUpperCase();
+        }
+        if (dados.email() != null) {
+            this.email = dados.email().toLowerCase();
+        }
         this.telefone=dados.telefone();
         this.id_veiculo=dados.id_veiculo();
         this.endereco=new Endereco(dados.endereco());
@@ -46,10 +50,10 @@ public class CondutorEntity {
 
     public void atualizarInformacoes(DadosAtualizacaoCondutor dados) {
         if (dados.nome() != null) {
-            this.nome = dados.nome();
+            this.nome = dados.nome().toUpperCase();
         }
         if (dados.email() != null) {
-            this.email = dados.email();
+            this.email = dados.email().toLowerCase();
         }
         if (dados.telefone() != null) {
             this.telefone = dados.telefone();
@@ -57,7 +61,6 @@ public class CondutorEntity {
         if (dados.id_veiculo() != null) {
             this.id_veiculo = dados.id_veiculo();
         }
-
         if (dados.endereco() != null) {
             this.endereco=(dados.endereco());
         }

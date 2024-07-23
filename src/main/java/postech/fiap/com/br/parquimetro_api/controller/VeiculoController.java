@@ -13,8 +13,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import postech.fiap.com.br.parquimetro_api.ValidacaoException;
 import postech.fiap.com.br.parquimetro_api.domain.veiculo.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("veiculos")
 public class VeiculoController {
@@ -24,7 +22,6 @@ public class VeiculoController {
 
     public VeiculoController(VeiculoRepository veiculoRepository) {
     }
-
     @PostMapping
     @Transactional
     public ResponseEntity cadastrar(@RequestBody VeiculoDto veiculoDto, UriComponentsBuilder uriBuilder) {
@@ -36,9 +33,7 @@ public class VeiculoController {
         } catch (ValidacaoException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-
     }
-
     @PutMapping
     @Transactional
     public ResponseEntity altera(@RequestBody @Valid DadosAtualizacaoVeiculosDto dados) {
@@ -53,13 +48,11 @@ public class VeiculoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
-
     @GetMapping
     public ResponseEntity<Page<DadosListagemVeiculoDto>> listar(@PageableDefault(size = 10, sort = {"marca"}) Pageable paginacao) {
         var page = veiculoRepository.findAll(paginacao).map(DadosListagemVeiculoDto::new);
         return ResponseEntity.ok(page);
     }
-
     @GetMapping("/{id}")
     public ResponseEntity detalhar(@PathVariable Long id) {
         try {
@@ -71,7 +64,5 @@ public class VeiculoController {
         } catch (ValidacaoException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-
     }
-
 }

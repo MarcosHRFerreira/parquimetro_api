@@ -9,7 +9,6 @@ import lombok.*;
 @Table(name="preco")
 @Getter
 @Setter
-
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 
@@ -18,21 +17,17 @@ public class PrecoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_preco;
-
     private Double valor;
-
     @Enumerated(EnumType.STRING)
     private Tipo_Modalidade modalidade;
 
     // Construtor vazio
     public PrecoEntity() {
     }
-
     public PrecoEntity(PrecoDto dados){
         this.modalidade= dados.modalidade();
         this.valor=dados.valor();
     }
-
     public void atualizarInformacoes(DadosAtualizacaoPrecoDto dados) {
         if(dados.modalidade()!=null){
             this.modalidade=dados.modalidade();
@@ -40,8 +35,5 @@ public class PrecoEntity {
         if(dados.valor()!= null){
             this.valor=dados.valor();
         }
-
     }
-
-
 }

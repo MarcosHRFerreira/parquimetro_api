@@ -1,9 +1,5 @@
 package postech.fiap.com.br.parquimetro_api.domain.preco;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import postech.fiap.com.br.parquimetro_api.domain.condutor.CondutorEntity;
-
 public record DadosListagemPrecoDto(
         Long id_preco,
         Double valor,
