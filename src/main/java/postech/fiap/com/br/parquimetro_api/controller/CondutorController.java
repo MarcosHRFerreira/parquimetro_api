@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import postech.fiap.com.br.parquimetro_api.ValidacaoException;
 import postech.fiap.com.br.parquimetro_api.domain.condutor.*;
+import postech.fiap.com.br.parquimetro_api.domain.veiculo.VeiculoRepository;
 import postech.fiap.com.br.parquimetro_api.exception.NaoEncontradoException;
 
 @RestController
@@ -22,12 +23,20 @@ public class CondutorController {
     @Autowired
     private CondutorRepository repository;
 
+    @Autowired
+    private VeiculoRepository veiculoRepository;
+
     @PostMapping
     @Transactional
     public ResponseEntity cadastrar(@Valid @RequestBody CondutorDto dados, UriComponentsBuilder uriBuilder){
 
         try {
             var condutor = new CondutorEntity(dados);
+
+            if (veiculoRepository.existsById(dados.id_veiculo())) {
+                throw new ValidacaoException("Id do Veiculo se encontra cadastrado!");
+            }
+
             repository.save(condutor);
 
             var uri = uriBuilder.path("/condutor/{id}").buildAndExpand(condutor.getId_condutor()).toUri();
