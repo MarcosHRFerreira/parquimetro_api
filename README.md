@@ -83,6 +83,8 @@ opções flexíveis de pagamento e emissão de recibos.
 
 ### 1. Efetuar o cadastro do Veiculo
 
+POST http://localhost:8080/veiculos
+
 {
 "modelo":"POLO",
 "marca":"VOLKSWAGEN",
@@ -91,6 +93,8 @@ opções flexíveis de pagamento e emissão de recibos.
 }
 
 ### 2. Efetuar o cadastro do Condutor
+
+POST http://localhost:8080/condutores
 
 {
 "nome": "Zé",
@@ -108,12 +112,16 @@ opções flexíveis de pagamento e emissão de recibos.
 
 ### 3. Efetuar o cadastro do Preço
 
+POST http://localhost:8080/precos
+
 {
 "modalidade": "HORA_CHEIA",
 "valor": 16.0
 }
 
 ### 4. Efetuar o cadastro da Locação
+
+POST http://localhost:8080/locacoes
 
 {
 "data_entrada": "2024-07-26T18:30:10",
@@ -143,6 +151,8 @@ Será enviado um aviso quando a locação estiver próxima do término (15 minut
 O email utilizado será do condutor.
 
 Para finalizar a locação:
+
+PUT http://localhost:8080/locacoes/encerrar
 
 {
 "id_locacao":2,
