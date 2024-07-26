@@ -68,7 +68,7 @@ public class AlertaLocacaoService {
                 }
                 //verificando se o tempo restante da locação é menor ou igual a 60 segundos, ou seja, 1 minuto.
                 if (tempoRestante <= 60) {
-
+                    // Se o periodo for HORA, acrescenta mais uma hora na duração e ativo o aviso previo de 15 minutos para o vencimento.
                     if (Tipo_Periodo.HORA.equals(locacao.getTipo_periodo())) {
                         locacao.setDuracao(locacao.getDuracao() + 1);
                         locacao.setValor_cobrado(locacao.getPrecoEntity().getValor() * locacao.getDuracao());
@@ -76,6 +76,7 @@ public class AlertaLocacaoService {
 
                         locacaoRepository.save(locacao);
 
+                        // Dispara o email para o aviso de renovação
                         enviarAlerta(locacao.getCondutorEntity().getEmail(), subtitulo, mensagem1 + " " + descricao_veiculo);
                     }
                 }

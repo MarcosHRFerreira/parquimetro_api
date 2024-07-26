@@ -78,3 +78,79 @@ opções flexíveis de pagamento e emissão de recibos.
 
 ### _Swaager_
 #### http://localhost:8080/swagger-ui.html
+
+## _Informações do Cadastro:_
+
+### 1. Efetuar o cadastro do Veiculo
+
+{
+"modelo":"POLO",
+"marca":"VOLKSWAGEN",
+"PLACA":"EEA8855",
+"tipo_veiculo":"AUTOMOVEL"
+}
+
+### 2. Efetuar o cadastro do Condutor
+
+{
+"nome": "Zé",
+"email":"ze@gmail.com",
+"telefone":"121111",
+"id_veiculo": 4,
+"endereco":{
+"logradouro":"RUA DO ZE",
+"bairro": "BAIRRO DO ZE",
+"cep":"12345678",
+"uf":"SP",
+"cidade":"SAO PAULO",
+"numero":"436"
+}
+
+### 3. Efetuar o cadastro do Preço
+
+{
+"modalidade": "HORA_CHEIA",
+"valor": 16.0
+}
+
+### 4. Efetuar o cadastro da Locação
+
+{
+"data_entrada": "2024-07-26T18:30:10",
+"data_encerramento": "",
+"duaracao": 1,
+"valor_cobrado": 16.0,
+"tipo_periodo":"HORA",
+"tipo_pagamento":"CARTAO_CREDITO",
+"status_pagamento":"PENDENTE",
+"id_condutor": 1,
+"id_veiculo": 1,
+"id_preco": 1
+}
+
+### 6. Como Funciona:
+
+Ao subir a aplicação, será lançada o evento de SCHEDULED:
+
+@Scheduled(fixedDelay = 1, timeUnit = TimeUnit.MINUTES) dentro da classe AlertaLocacaoService
+
+A cada minuto, buscará na base todas locações em aberto com a data de encerramento = NULL
+
+Será efetuada analise para a locação corrente, para avisos ou alteração de periodo.
+
+Será enviado um aviso quando a locação estiver próxima do término (15 minutos antes) ou quando o período de locação for excedido.
+
+O email utilizado será do condutor.
+
+Para finalizar a locação:
+
+{
+"id_locacao":2,
+"data_encerramento": "2024-07-27T22:47",
+"status_pagamento":"EFETUADO"
+}
+
+O processo de finalização da locação, com a atualização da data de encerramento e o status do pagamento, 
+é fundamental para registrar o término da locação e gerar o recibo.
+
+
